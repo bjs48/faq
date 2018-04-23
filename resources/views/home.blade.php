@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 
 @section('content')
@@ -28,7 +27,7 @@
                                             <div class="card-footer">
                                                 <p class="card-text">
 
-                                                    <a class="btn btn-primary float-right" href="#">
+                                                    <a class="btn btn-primary float-right" href="{{ route('question.show', ['id' => $question->id]) }}">
                                                         View
                                                     </a>
                                                 </p>
