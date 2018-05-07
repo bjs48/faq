@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Answer;
 use App\Question;
+use App\Notifications\notify;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
@@ -54,6 +55,8 @@ class AnswerController extends Controller
         $Answer->user()->associate(Auth::user());
         $Answer->question()->associate($question);
         $Answer->save();
+
+        Auth::user()->notify(new notify());
 
         return redirect()->route('questions.show',['question_id' => $question->id])->with('message', 'Saved');
     }
@@ -107,7 +110,7 @@ class AnswerController extends Controller
         $answer->body = $request->body;
         $answer->save();
 
-        return redirect()->route('answers.show',['question_id' => $question, 'answer_id' => $answer])->with('message', 'Updated');
+
 
     }
 
